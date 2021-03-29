@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+import ArtistEntry from './components/ArtistEntry';
+
 import './App.css';
 import 'bulma/css/bulma.css';
-import axios from 'axios';
 
 class App extends Component {
     state = {
-        results: [],
+        artists: [],
     };
 
     async componentDidMount() {
         axios
-            .get('http://localhost:3001/albums/Wolves')
-            .then(res => this.setState({ results: res.data }));
+            .get('http://localhost:3001/artists/Rise')
+            .then(res => this.setState({ artists: res.data }));
     }
 
     render() {
@@ -21,11 +24,9 @@ class App extends Component {
                     <h1>ACE</h1>
                 </header>
                 <main>
-                    {this.state.results.map((result, i) => {
+                    {this.state.artists.map((result, i) => {
                         return (
-                            <div key={i} className='card'>
-                                {result.name}
-                            </div>
+                            <ArtistEntry key={i} data={result}></ArtistEntry>
                         );
                     })}
                 </main>
