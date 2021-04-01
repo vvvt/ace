@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ArtistEntry from './components/ArtistEntry';
+import AlbumEntry from './components/AlbumEntry';
+import TrackEntry from './components/TrackEntry';
 
 import './App.css';
 import 'bulma/css/bulma.css';
@@ -17,13 +19,35 @@ class App extends Component {
 
 	handleSearch = () => {
 		const { query, mode } = this.state;
-		console.log(query, mode);
+		console.log(query);
 
 		axios.get(`http://localhost:3001/${mode}/${query}`).then(res => {
-			console.log(mode, res);
-			if (mode === 'albums') this.setState({ albums: res.data });
-			if (mode === 'artists') this.setState({ artists: res.data });
-			if (mode === 'tracks') this.setState({ tracks: res.data });
+			switch (mode) {
+				case 'albums':
+					console.log('albums', res);
+					this.setState({
+						albums: res.data,
+						artists: [],
+						tracks: [],
+					});
+					break;
+				case 'artists':
+					console.log('artists', res);
+					this.setState({
+						albums: [],
+						artists: res.data,
+						tracks: [],
+					});
+					break;
+				case 'tracks':
+					console.log('tracks', res);
+					this.setState({
+						albums: [],
+						artists: [],
+						tracks: res.data,
+					});
+					break;
+			}
 		});
 	};
 
@@ -36,7 +60,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { mode, artists } = this.state;
+		const { mode, artists, albums, tracks } = this.state;
 
 		return (
 			<>
@@ -75,11 +99,25 @@ class App extends Component {
 						</p>
 					</div>
 					<div className='results'>
+						{albums.map((result, i) => {
+							return (
+								<AlbumEntry
+									key={i}
+									data={result}></AlbumEntry>
+							);
+						})}
 						{artists.map((result, i) => {
 							return (
 								<ArtistEntry
 									key={i}
 									data={result}></ArtistEntry>
+							);
+						})}
+						{tracks.map((result, i) => {
+							return (
+								<TrackEntry
+									key={i}
+									data={result}></TrackEntry>
 							);
 						})}
 					</div>

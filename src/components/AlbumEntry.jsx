@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class AlbumEntry extends Component {
 	render() {
-		const { name, image } = this.props.data;
+		const { name, artist, year, image, colorScheme } = this.props.data;
 
 		return (
 			<div className='results-entry results-album'>
