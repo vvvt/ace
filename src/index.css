@@ -1,8 +1,52 @@
 body {
-    margin: 0;
+	margin: 0;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+h1 {
+	width: 100%;
+}
+
+.results {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	padding: 0 16px;
+	gap: 16px;
+}
+
+.results-entry {
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+	border: 0.5px solid rgba(0, 0, 0, 0.02);
+	border-radius: 4px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.artist-image {
+	height: 50px;
+	width: 50px;
+	flex: 1;
+}
+
+.artist-name {
+	flex: 4;
+	padding: 4px 0px;
+	max-height: 50px;
+	height: max-content;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.artist-albums {
+	flex: 1;
+	background-color: royalblue;
+	height: 50px;
+	/* show only on desktop */
 }
