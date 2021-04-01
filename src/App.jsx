@@ -9,14 +9,31 @@ import 'bulma/css/bulma.css';
 class App extends Component {
 	state = {
 		artists: [],
-		mode: 'album',
+		albums: [],
+		tracks: [],
+		mode: 'albums',
+		query: '',
 	};
 
-	async componentDidMount() {
-		axios
-			.get('http://localhost:3001/artists/Rise')
-			.then(res => this.setState({ artists: res.data }));
-	}
+	handleSearch = () => {
+		const { query, mode } = this.state;
+		console.log(query, mode);
+
+		axios.get(`http://localhost:3001/${mode}/${query}`).then(res => {
+			console.log(mode, res);
+			if (mode === 'albums') this.setState({ albums: res.data });
+			if (mode === 'artists') this.setState({ artists: res.data });
+			if (mode === 'tracks') this.setState({ tracks: res.data });
+		});
+	};
+
+	handleChange = event => {
+		this.setState({ query: event.target.value });
+	};
+
+	handleModeSelect = event => {
+		this.setState({ mode: event.target.value });
+	};
 
 	render() {
 		const { mode, artists } = this.state;
@@ -30,10 +47,14 @@ class App extends Component {
 					<div className='field has-addons'>
 						<p className='control'>
 							<span className='select'>
-								<select>
-									<option>Albums</option>
-									<option>Artists</option>
-									<option>Tracks</option>
+								<select onChange={this.handleModeSelect}>
+									<option value='albums' defaultValue>
+										Albums
+									</option>
+									<option value='artists'>
+										Artists
+									</option>
+									<option value='tracks'>Tracks</option>
 								</select>
 							</span>
 						</p>
@@ -41,11 +62,16 @@ class App extends Component {
 							<input
 								className='input'
 								type='text'
+								onChange={this.handleChange}
 								placeholder={`Title of ${mode}`}
 							/>
 						</p>
 						<p className='control'>
-							<a className='button'>Go</a>
+							<button
+								className='button'
+								onClick={this.handleSearch}>
+								Go
+							</button>
 						</p>
 					</div>
 					<div className='results'>
