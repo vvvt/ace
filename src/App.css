@@ -6,13 +6,14 @@
     margin-bottom: 1em;
 }
 .header-title {
-    font-size: 4em;
+    font-size: 4vh;
     background: #0085ff;
     font-family: Nunito, Arial, sans-serif;
 }
 .header-subtitle {
-    font-size: 1.2em;
+    font-size: 1.1vh;
     background: #006acc;
+    padding: 6px;
 }
 
 /* Main */
@@ -45,7 +46,7 @@ main > * {
 }
 
 .results p {
-    font-size: 1.2vh;
+    font-size: 1.1vh;
 }
 
 /* Album Entry */
@@ -157,7 +158,6 @@ main > * {
     flex: 1;
 }
 .artist-name > p {
-    font-size: 1.5vh;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
