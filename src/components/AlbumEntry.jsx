@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-const AlbumColorsMobile = ({ colors }) => (
-    <div className='album-colors-mobile'>
+const ColorList = ({ colors, mobile }) => (
+    <div className={`album-colors${mobile ? '-mobile' : ''}`}>
         {colors.map(color => (
             <div
                 style={{
                     flex: 1,
-                    height: '10px',
+                    height: mobile ? '10px' : '100%',
                     backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
                 }}
             ></div>
@@ -27,44 +27,14 @@ class AlbumEntry extends Component {
                         <p>{year}</p>
                     </div>
                     {window.matchMedia('(min-width: 701px)').matches && (
-                        <div className='album-colors'>
-                            {colorScheme.map(color => (
-                                <div
-                                    style={{
-                                        flex: 1,
-                                        backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
-                                    }}
-                                ></div>
-                            ))}
-                        </div>
+                        <ColorList colors={colorScheme} />
                     )}
                     <button className='album-button'>Copy</button>
                 </div>
                 {window.matchMedia('(max-width: 700px)').matches && (
-                    <AlbumColorsMobile colors={colorScheme} />
+                    <ColorList colors={colorScheme} mobile />
                 )}
             </div>
-            /* <div className='results-entry results-album'>
-					<div className='album-info'>
-						<img className='album-image' src={image} />
-						<div className='album-text'>
-							<div>{name}</div>
-							<div>
-								{artist} ({year})
-							</div>
-						</div>
-					</div>
-					<div className='album-colors'>
-						{colorScheme.map(color => (
-							<div
-								style={{
-									flex: 1,
-									height: '10px',
-									backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
-								}}></div>
-						))}
-					</div>
-				</div> */
         );
     }
 }
