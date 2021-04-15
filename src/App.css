@@ -94,10 +94,17 @@ main > * {
     border-bottom-right-radius: 4px;
 }
 
-.album-button {
-    border-radius: 4px;
-    background-color: aliceblue;
+.copy-button {
+    background-color: transparent;
+    border-radius: 100px;
+    height: 40px;
+    width: 40px;
     border: none;
+    align-self: center;
+}
+.copy-button:hover,
+.copy-button:active {
+    background-color: aliceblue;
 }
 
 @media (max-width: 700px) {

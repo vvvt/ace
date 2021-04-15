@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Download } from 'react-feather';
 
 const ColorList = ({ colors, mobile }) => (
     <div className={`album-colors${mobile ? '-mobile' : ''}`}>
@@ -29,7 +30,9 @@ class AlbumEntry extends Component {
                     {window.matchMedia('(min-width: 701px)').matches && (
                         <ColorList colors={colorScheme} />
                     )}
-                    <button className='album-button'>Copy</button>
+                    <button className='copy-button'>
+                        <Download />
+                    </button>
                 </div>
                 {window.matchMedia('(max-width: 700px)').matches && (
                     <ColorList colors={colorScheme} mobile />
